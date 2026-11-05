@@ -30,21 +30,37 @@ Full detail is in DECISIONS.md.
 
 - D-001: public GitHub with honest history, plus a separate portfolio page
 - D-002: universe is UCITS ETFs sold in the UK and EU
-- D-003: index scope undecided, to be chosen after the survey
+- D-003 / D-008: index scope is MSCI World, MSCI ACWI and FTSE All-World
 - D-004: six gated phases; source PDFs are not committed to the repo
 - D-005: raw collected data stays local; the repo publishes analysis only
+- D-006: SPDR's UK site excluded (professionals only)
+- D-007: never read behind a terms box without accepting it
+- D-009: inclusion rule (plain index, no tilts, not hedged-only)
+- D-010: one share class per fund, chosen by a fixed rule
+- D-011: tracking difference from issuer calendar-year tables, our own calculation
+- D-012: Xtrackers figures flagged before any public use
 
 ## Current position
 
-Phase 1 is in progress. The survey has 9 funds so far (7 Vanguard, 2 iShares), all tracking FTSE indices except one MSCI World fund whose index field is still blank. The data folder is local only (D-005).
+Phase 1 is done, pending one spot-check by the owner (below).
 
-Blocker: iShares, Xtrackers, Amundi, HSBC and Invesco all show a terms acceptance box before their fund lists. Those need accepting before collection continues. SPDR's UK site is excluded (D-006).
+What the survey found (5 Nov 2026):
+- 79 global equity UCITS ETFs (125 share classes) on the UK sites of iShares, Vanguard, Xtrackers and Invesco.
+- 17 of them are plain broad-index funds. The rest are ESG, factor, sector, size or regional versions.
+- MSCI World is by far the most crowded index (7 core funds, 43 variants). MSCI ACWI has 3 core funds, FTSE All-World 4.
+- Amundi and HSBC show no broad global ETF on their UK individual-investor lists. SPDR's UK site is for professionals only.
+- Final comparison set: 14 funds across 3 indices and 4 issuers (list kept locally in data/final_funds.csv).
+- Chart: charts/funds_per_index.svg
 
-Good news for Phase 5: Vanguard fund pages show five years of fund returns next to benchmark returns. If other issuers do the same, tracking difference can be calculated from issuer pages.
+Early signals worth testing later (not findings yet, nothing checked against key documents):
+- Fees for the same MSCI World index range widely across funds and even across share classes of one fund.
+- Swap-based funds appear to have beaten their index in recent years on issuer pages.
+- Issuer pages give fund vs index returns at different precision (0.1 vs 0.01 points), which limits tracking difference accuracy.
+- One issuer page shows a listing date earlier than the fund's launch date. A candidate for the Phase 4 mismatch list.
 
-**Next action:** accept the issuer terms boxes, then carry on filling the survey sheet from issuer sites (iShares, Vanguard, Xtrackers, Amundi, SPDR, Invesco, UBS, HSBC, L&G, Fidelity and others), checking each site's terms first. Aim for roughly 20 to 30 rows across several issuers. Then count funds per index and chart it.
+**Next action (owner):** open 5 random rows of data/survey_funds.csv, check each against the issuer page, and note any error in MISTAKES.md. Then OK Phase 2.
 
-Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url, date_accessed, terms_checked (yes/no/unclear), notes. ISIN is the unique ID. Leave blanks rather than guess.
+**Next action (Phase 2):** collect factsheet and key document for each of the 14 funds.
 
 ## Checklist
 
@@ -53,12 +69,13 @@ Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url,
 - [x] Phased plan written (PHASES.md)
 
 ### Phase 1: Choose the universe
-- [ ] Survey rows added to data/index_survey.csv (9 so far)
-- [ ] Terms of use noted for every issuer site (all main issuers checked 2026-11-05; Vanguard read in full, five issuers gated, SPDR excluded)
-- [ ] Funds-per-index bar chart made
-- [ ] Index scope decided (closes D-003)
-- [ ] Inclusion rule written in DECISIONS.md (UCITS, replication type, accumulating or distributing, base currency)
-- [ ] Final list of 12 to 15 funds, each with ISIN, issuer, index and source URL
+- [x] Survey collected: 79 funds, 125 share classes, 4 issuers (data/survey_funds.csv)
+- [x] Terms of use noted for every issuer site (data/terms_notes.md)
+- [x] Funds-per-index bar chart made (charts/funds_per_index.svg)
+- [x] Index scope decided (D-008)
+- [x] Inclusion rule written (D-009, D-010)
+- [x] Final list of 14 funds (data/final_funds.csv)
+- [ ] Owner spot-check of 5 survey rows
 
 ### Phase 2: Collect the documents
 - [ ] Decide whether PDFs may be stored anywhere (default: local only, not in repo)
@@ -83,7 +100,7 @@ Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url,
 - [ ] Dataset frozen; later changes need a log entry
 
 ### Phase 5: Analysis
-- [ ] Source and terms for index return data agreed (needed for tracking difference)
+- [x] Source for index return data: issuer calendar-year tables (D-011)
 - [ ] If no legitimate source: tracking difference dropped and the brief says so
 - [ ] SQL tables and queries built
 - [ ] Excel workbook with live formulas
@@ -102,13 +119,15 @@ Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url,
 
 ## Open decisions
 
-- Index scope (Phase 1)
 - Whether any source documents can be stored beyond local use (Phase 2)
-- Source for index returns (Phase 5)
+- Whether Xtrackers figures can appear in public outputs (D-012)
+- How to handle different return precision across issuers (Phase 5)
 
 ## Known risks
 
-- Tracking difference needs index and fund return data. Vanguard pages show yearly fund vs benchmark returns, which may be enough. Other issuers not yet checked.
+- Tracking difference: issuer pages give fund vs index returns, but at different precision and over different periods (calendar year vs Nov to Oct). Several funds launched in 2024 to 2026 have one year or less of history.
+- Fund sizes are reported in different currencies (USD on iShares, Vanguard, Invesco; GBP on Xtrackers). Must convert before comparing.
+- Survey coverage gaps: Invesco list pages 3 to 6 did not load (funds checked by name instead), UBS ETF page not found, Amundi showed 50 of 53 products.
 - Ten hand-checked funds is a small sample. The accuracy figure must always be quoted with its denominator, never as a general claim.
 - "Global equity" covers several different indices (MSCI World, MSCI ACWI, FTSE All-World and others). Mixing them without labelling would make fee comparisons misleading.
 - Issuer sites may restrict copying. Terms get checked before any data is taken.
@@ -131,7 +150,8 @@ Only what has actually been done, with real numbers.
 - PROGRESS.md: this file
 - DECISIONS.md: every choice and why
 - MISTAKES.md: every error and the fix
-- data/ (local only): survey sheet and terms notes
+- charts/: public charts
+- data/ (local only): raw issuer lists, survey, final fund list, return tables, terms notes, build scripts
 
 ## History
 
@@ -140,3 +160,4 @@ Only what has actually been done, with real numbers.
 - 2026-11-05: 2 iShares rows pre-filled from public pages (to verify by hand); product lists on iShares and Amundi do not load without a browser
 - 2026-11-05: 7 Vanguard funds collected; terms gates found on iShares, Xtrackers, Amundi, HSBC, Invesco; SPDR UK excluded
 - 2026-11-05: issuer terms checked for five issuers; decided raw data stays local (D-005)
+- 2026-11-05: terms accepted on five issuer sites; survey finished (79 funds); chart made; scope, inclusion rule and share class rule set (D-008 to D-012); Phase 1 done pending spot-check

@@ -2,6 +2,9 @@
 
 Record every error, what caused it, how it was caught, and the fix.
 
-| Date | Step | Mistake | How caught | Fix |
+| Date | Phase | Mistake | How caught | Fix |
 |---|---|---|---|---|
-| | | None yet | | |
+| 2026-11-05 | 1 | First attempt to read issuer fund lists returned almost nothing | Results were near empty (2 funds) | Lists are built by JavaScript; switched to reading them in a real browser |
+| 2026-11-05 | 1 | Adding a search word to the Amundi list address did nothing; the list came back unfiltered | Results included S&P 500 and bond funds | Read the whole list and filtered it ourselves |
+| 2026-11-05 | 1 | Fund classifier counted "FTSE All-World ex-US" as a core fund (rule missed the spelling "ex-US") and counted an active "Enhanced" fund under MSCI ACWI | Listed every fund marked core and read the names | Fixed the rule, re-ran; core count went from 19 to 17 |
+| 2026-11-05 | 1 | Funds-per-index chart cut off the longest label and said "1 variants" | Looked at the rendered chart | Widened the right margin, fixed the plural |

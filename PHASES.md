@@ -4,7 +4,7 @@ Six phases. I review the results at the end of each one before starting the next
 
 ## 1. Choose the universe
 
-Find out which global equity indices have enough UCITS ETFs to compare. I fill in `data/index_survey.csv` by hand from issuer websites (iShares, Vanguard, Xtrackers, Amundi, SPDR and others), checking each site's terms first. Then I count funds per index, chart it, and pick the index scope and the final 12 to 15 funds. The inclusion rule gets written down in DECISIONS.md.
+Find out which global equity indices have enough UCITS ETFs to compare. The survey is collected from issuer websites (iShares, Vanguard, Xtrackers, Amundi, SPDR and others), checking each site's terms first. Then I count funds per index, chart it, and pick the index scope and the final 12 to 15 funds. The inclusion rule gets written down in DECISIONS.md.
 
 Output: survey sheet and a funds-per-index chart.
 
