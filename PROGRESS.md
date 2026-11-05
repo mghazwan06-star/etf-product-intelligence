@@ -17,7 +17,7 @@ Deliverables: a two-page brief, an Excel model, a short deck. A separate portfol
 ## Rules
 
 1. Every number comes from real work. No estimates.
-2. Public repo: no personal data, no CV, no private notes, no source PDFs.
+2. Public repo: no personal data, no CV, no private notes, no source PDFs, no raw issuer data.
 3. Keep this file, DECISIONS.md and MISTAKES.md up to date.
 4. Each step is explained in plain English and needs an explicit OK before it starts.
 5. Real commit history. Never rewrite or backdate it.
@@ -32,10 +32,11 @@ Full detail is in DECISIONS.md.
 - D-002: universe is UCITS ETFs sold in the UK and EU
 - D-003: index scope undecided, to be chosen after the survey
 - D-004: six gated phases; source PDFs are not committed to the repo
+- D-005: raw collected data stays local; the repo publishes analysis only
 
 ## Current position
 
-Phase 1 is in progress. `data/index_survey.csv` has headers only, no rows yet.
+Phase 1 is in progress. `data/index_survey.csv` has headers only, no rows yet. The data folder is local only and not in the repo (D-005).
 
 **Next action:** fill the survey sheet by hand from issuer sites (iShares, Vanguard, Xtrackers, Amundi, SPDR, Invesco, UBS, HSBC, L&G, Fidelity and others), checking each site's terms first. Aim for roughly 20 to 30 rows across several issuers. Then count funds per index and chart it.
 
@@ -49,7 +50,7 @@ Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url,
 
 ### Phase 1: Choose the universe
 - [ ] Survey rows added to data/index_survey.csv
-- [ ] Terms of use noted for every issuer site
+- [ ] Terms of use noted for every issuer site (iShares, Amundi, SPDR checked 2026-11-05; Vanguard and Xtrackers still to do)
 - [ ] Funds-per-index bar chart made
 - [ ] Index scope decided (closes D-003)
 - [ ] Inclusion rule written in DECISIONS.md (UCITS, replication type, accumulating or distributing, base currency)
@@ -126,9 +127,10 @@ Only what has actually been done, with real numbers.
 - PROGRESS.md: this file
 - DECISIONS.md: every choice and why
 - MISTAKES.md: every error and the fix
-- data/index_survey.csv: the Phase 1 survey sheet
+- data/ (local only): survey sheet and terms notes
 
 ## History
 
 - 2026-10-20: project scoped, repo created, logs set up, Phase 1 template made
 - 2026-11-05: phased plan written, this file expanded
+- 2026-11-05: issuer terms checked for five issuers; decided raw data stays local (D-005)
