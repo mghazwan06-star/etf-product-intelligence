@@ -7,3 +7,5 @@
 | D-003 | 2026-10-20 | Index scope: undecided. Survey which global indices have enough funds, then choose and compare | Avoids mixing incomparable index universes by accident | MSCI only; MSCI plus FTSE |
 | D-004 | 2026-11-05 | Project split into six gated phases (see PHASES.md). Source PDFs not committed to the public repo by default. | Each phase ends in a review; avoids redistribution issues | Single long build |
 | D-005 | 2026-11-05 | Raw collected issuer data stays local. Repo publishes method, analysis, charts and write-up only. | Issuer terms allow personal use but restrict copying and publishing; none clearly allow republishing figures | Email issuers first; publish figures with attribution |
+| D-006 | 2026-11-05 | Exclude SPDR's UK site as a source | It requires confirming you are a financial professional, which isn't true | Accepting the gate anyway |
+| D-007 | 2026-11-05 | Never read content behind a terms acceptance box without accepting it first | Reading behind the box would sidestep the terms | Scraping the page underneath |

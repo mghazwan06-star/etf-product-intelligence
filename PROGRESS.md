@@ -36,9 +36,13 @@ Full detail is in DECISIONS.md.
 
 ## Current position
 
-Phase 1 is in progress. `data/index_survey.csv` has headers only, no rows yet. The data folder is local only and not in the repo (D-005).
+Phase 1 is in progress. The survey has 9 funds so far (7 Vanguard, 2 iShares), all tracking FTSE indices except one MSCI World fund whose index field is still blank. The data folder is local only (D-005).
 
-**Next action:** fill the survey sheet by hand from issuer sites (iShares, Vanguard, Xtrackers, Amundi, SPDR, Invesco, UBS, HSBC, L&G, Fidelity and others), checking each site's terms first. Aim for roughly 20 to 30 rows across several issuers. Then count funds per index and chart it.
+Blocker: iShares, Xtrackers, Amundi, HSBC and Invesco all show a terms acceptance box before their fund lists. Those need accepting before collection continues. SPDR's UK site is excluded (D-006).
+
+Good news for Phase 5: Vanguard fund pages show five years of fund returns next to benchmark returns. If other issuers do the same, tracking difference can be calculated from issuer pages.
+
+**Next action:** accept the issuer terms boxes, then carry on filling the survey sheet from issuer sites (iShares, Vanguard, Xtrackers, Amundi, SPDR, Invesco, UBS, HSBC, L&G, Fidelity and others), checking each site's terms first. Aim for roughly 20 to 30 rows across several issuers. Then count funds per index and chart it.
 
 Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url, date_accessed, terms_checked (yes/no/unclear), notes. ISIN is the unique ID. Leave blanks rather than guess.
 
@@ -49,8 +53,8 @@ Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url,
 - [x] Phased plan written (PHASES.md)
 
 ### Phase 1: Choose the universe
-- [ ] Survey rows added to data/index_survey.csv
-- [ ] Terms of use noted for every issuer site (iShares, Amundi, SPDR checked 2026-11-05; Vanguard and Xtrackers still to do)
+- [ ] Survey rows added to data/index_survey.csv (9 so far)
+- [ ] Terms of use noted for every issuer site (all main issuers checked 2026-11-05; Vanguard read in full, five issuers gated, SPDR excluded)
 - [ ] Funds-per-index bar chart made
 - [ ] Index scope decided (closes D-003)
 - [ ] Inclusion rule written in DECISIONS.md (UCITS, replication type, accumulating or distributing, base currency)
@@ -104,7 +108,7 @@ Survey columns: fund_name, isin, issuer, index_name, index_provider, source_url,
 
 ## Known risks
 
-- Tracking difference needs index and fund return data. Key documents only show limited past performance. A legitimate source with workable terms is not yet identified.
+- Tracking difference needs index and fund return data. Vanguard pages show yearly fund vs benchmark returns, which may be enough. Other issuers not yet checked.
 - Ten hand-checked funds is a small sample. The accuracy figure must always be quoted with its denominator, never as a general claim.
 - "Global equity" covers several different indices (MSCI World, MSCI ACWI, FTSE All-World and others). Mixing them without labelling would make fee comparisons misleading.
 - Issuer sites may restrict copying. Terms get checked before any data is taken.
@@ -134,4 +138,5 @@ Only what has actually been done, with real numbers.
 - 2026-10-20: project scoped, repo created, logs set up, Phase 1 template made
 - 2026-11-05: phased plan written, this file expanded
 - 2026-11-05: 2 iShares rows pre-filled from public pages (to verify by hand); product lists on iShares and Amundi do not load without a browser
+- 2026-11-05: 7 Vanguard funds collected; terms gates found on iShares, Xtrackers, Amundi, HSBC, Invesco; SPDR UK excluded
 - 2026-11-05: issuer terms checked for five issuers; decided raw data stays local (D-005)
