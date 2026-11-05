@@ -133,4 +133,5 @@ Only what has actually been done, with real numbers.
 
 - 2026-10-20: project scoped, repo created, logs set up, Phase 1 template made
 - 2026-11-05: phased plan written, this file expanded
+- 2026-11-05: 2 iShares rows pre-filled from public pages (to verify by hand); product lists on iShares and Amundi do not load without a browser
 - 2026-11-05: issuer terms checked for five issuers; decided raw data stays local (D-005)
