@@ -2,7 +2,7 @@
 
 Single source of truth for where this project stands. Updated at the end of every step.
 
-Last updated: 2026-11-05
+Last updated: 2026-11-06
 
 ## The project
 
@@ -39,10 +39,12 @@ Full detail is in DECISIONS.md.
 - D-010: one share class per fund, chosen by a fixed rule
 - D-011: tracking difference from issuer calendar-year tables, our own calculation
 - D-012: Xtrackers figures flagged before any public use
+- D-013: source PDFs kept locally in data/docs; files a site won't serve to a script get saved from the browser
+- D-014: no Vanguard factsheet on its UK investor site; product page figures stand in for it
 
 ## Current position
 
-Phase 1 is done, pending one spot-check by the owner (below).
+Phase 1 is done. Phase 2 is half done: 13 of 28 documents saved, 14 still to save from the browser, 1 not published.
 
 What the survey found (5 Nov 2026):
 - 79 global equity UCITS ETFs (125 share classes) on the UK sites of iShares, Vanguard, Xtrackers and Invesco.
@@ -58,9 +60,17 @@ Early signals worth testing later (not findings yet, nothing checked against key
 - Issuer pages give fund vs index returns at different precision (0.1 vs 0.01 points), which limits tracking difference accuracy.
 - One issuer page shows a listing date earlier than the fund's launch date. A candidate for the Phase 4 mismatch list.
 
-**Next action (owner):** open 5 random rows of data/survey_funds.csv, check each against the issuer page, and note any error in MISTAKES.md. Then OK Phase 2.
+Spot-check (6 Nov 2026): 5 random survey rows checked against the live issuer pages. All 5 fees match. One note: the lowest fee shown for the Xtrackers MSCI World Swap fund (0.04%) belongs to unlisted institutional classes, not something a UK individual can buy on an exchange. It doesn't affect the chosen share class.
 
-**Next action (Phase 2):** collect factsheet and key document for each of the 14 funds.
+Documents (6 Nov 2026), tracked in data/doc_tracker.csv:
+- iShares: all 6 funds, factsheet and KID saved (12 files).
+- Vanguard: KIID saved. No factsheet on the UK investor site.
+- Xtrackers (5 funds): documents sit behind download buttons with no plain link. To save from the browser.
+- Invesco (2 funds): the site refuses non-browser downloads. To save from the browser.
+
+**Next action:** save the 14 Xtrackers and Invesco files from the browser into data/docs, named ISIN_type_YYYY-MM-DD.pdf, and mark them in data/doc_tracker.csv.
+
+**After that (Phase 3):** fix the extraction fields and write the extraction prompt.
 
 ## Checklist
 
@@ -75,14 +85,15 @@ Early signals worth testing later (not findings yet, nothing checked against key
 - [x] Index scope decided (D-008)
 - [x] Inclusion rule written (D-009, D-010)
 - [x] Final list of 14 funds (data/final_funds.csv)
-- [ ] Owner spot-check of 5 survey rows
+- [x] Spot-check of 5 random survey rows (all fees match)
 
 ### Phase 2: Collect the documents
-- [ ] Decide whether PDFs may be stored anywhere (default: local only, not in repo)
-- [ ] Factsheet downloaded for each fund
-- [ ] Key document (KID/KIID) downloaded for each fund
-- [ ] Files named ISIN_type_YYYY-MM-DD
-- [ ] Missing-documents tracker complete
+- [x] PDFs stored locally only, not in the repo (D-013)
+- [ ] Factsheet saved for each fund (6 of 13 available; Vanguard has none)
+- [ ] Key document (KID/KIID) saved for each fund (7 of 14)
+- [x] Files named ISIN_type_YYYY-MM-DD
+- [x] Tracker made (data/doc_tracker.csv)
+- [ ] Tracker complete
 
 ### Phase 3: AI extraction and accuracy check
 - [ ] Fields fixed: annual fee, index, fund size, replication method (plus as-of date for each)
@@ -127,6 +138,7 @@ Early signals worth testing later (not findings yet, nothing checked against key
 
 - Tracking difference: issuer pages give fund vs index returns, but at different precision and over different periods (calendar year vs Nov to Oct). Several funds launched in 2024 to 2026 have one year or less of history.
 - Fund sizes are reported in different currencies (USD on iShares, Vanguard, Invesco; GBP on Xtrackers). Must convert before comparing.
+- Xtrackers MSCI World Swap II fund size reads "843,696.25" on the list page with no unit, unlike every other row. Check it against the factsheet.
 - Survey coverage gaps: Invesco list pages 3 to 6 did not load (funds checked by name instead), UBS ETF page not found, Amundi showed 50 of 53 products.
 - Ten hand-checked funds is a small sample. The accuracy figure must always be quoted with its denominator, never as a general claim.
 - "Global equity" covers several different indices (MSCI World, MSCI ACWI, FTSE All-World and others). Mixing them without labelling would make fee comparisons misleading.
@@ -151,7 +163,7 @@ Only what has actually been done, with real numbers.
 - DECISIONS.md: every choice and why
 - MISTAKES.md: every error and the fix
 - charts/: public charts
-- data/ (local only): raw issuer lists, survey, final fund list, return tables, terms notes, build scripts
+- data/ (local only): raw issuer lists, survey, final fund list, return tables, terms notes, build scripts, doc_tracker.csv, docs/ (source PDFs)
 
 ## History
 
@@ -161,3 +173,4 @@ Only what has actually been done, with real numbers.
 - 2026-11-05: 7 Vanguard funds collected; terms gates found on iShares, Xtrackers, Amundi, HSBC, Invesco; SPDR UK excluded
 - 2026-11-05: issuer terms checked for five issuers; decided raw data stays local (D-005)
 - 2026-11-05: terms accepted on five issuer sites; survey finished (79 funds); chart made; scope, inclusion rule and share class rule set (D-008 to D-012); Phase 1 done pending spot-check
+- 2026-11-06: 5 survey rows spot-checked, all fees match; Phase 2 started, 13 documents saved, tracker made (D-013, D-014)
