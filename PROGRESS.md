@@ -41,10 +41,12 @@ Full detail is in DECISIONS.md.
 - D-012: Xtrackers figures flagged before any public use
 - D-013: source PDFs kept locally in data/docs; files a site won't serve to a script get saved from the browser
 - D-014: no Vanguard factsheet on its UK investor site; product page figures stand in for it
+- D-015: fund size is taken from factsheets only, since key documents don't report it
+- D-016: the hand check is written into data/extraction/hand_check.csv with the tool column left empty until the hand values are in
 
 ## Current position
 
-Phase 1 is done. Phase 2 is half done: 13 of 28 documents saved, 14 still to save from the browser, 1 not published.
+Phase 1 is done. Phase 2 is half done: 13 of 28 documents saved, 14 still to save from the browser, 1 not published. Phase 3 has started: the extraction has run on the 13 saved documents.
 
 What the survey found (5 Nov 2026):
 - 79 global equity UCITS ETFs (125 share classes) on the UK sites of iShares, Vanguard, Xtrackers and Invesco.
@@ -68,9 +70,18 @@ Documents (6 Nov 2026), tracked in data/doc_tracker.csv:
 - Xtrackers (5 funds): documents sit behind download buttons with no plain link. To save from the browser.
 - Invesco (2 funds): the site refuses non-browser downloads. To save from the browser.
 
-**Next action:** save the 14 Xtrackers and Invesco files from the browser into data/docs, named ISIN_type_YYYY-MM-DD.pdf, and mark them in data/doc_tracker.csv.
+Extraction (6 Nov 2026): prompt fixed in method/extraction_prompt.md. Run once on each of the 13 saved documents. Raw output in data/extraction/raw/ (one file per document), flattened into data/extraction/extracted.csv. Nothing has been checked against it yet.
 
-**After that (Phase 3):** fix the extraction fields and write the extraction prompt.
+Things noticed while the documents were read (to test in Phase 4, not findings yet):
+- Index names are written differently between a fund's two documents, and sometimes inside one document (with and without "Net", "ACWI" vs "All Country World").
+- One iShares factsheet says the fund holds the index securities "in similar proportions" on the same page that labels the method "Optimised".
+- The two iShares swap funds list the index itself as a top holding at close to 100%, so their top 10 adds up to well over 100%.
+- Factsheets give calendar-year fund and index returns to two decimals; key documents give them to one. The factsheet tables are the better source for tracking difference.
+- Key documents carry dates from February to October 2026, so some are nine months older than the factsheets.
+
+**Next action:** save the 14 Xtrackers and Invesco files from the browser into data/docs, named ISIN_type_YYYY-MM-DD.pdf, and mark them in data/doc_tracker.csv. Then run the same prompt on them.
+
+**After that:** pick the 10 funds for the hand check and fill data/extraction/hand_check.csv by reading the PDFs, before opening the tool output.
 
 ## Checklist
 
@@ -96,9 +107,9 @@ Documents (6 Nov 2026), tracked in data/doc_tracker.csv:
 - [ ] Tracker complete
 
 ### Phase 3: AI extraction and accuracy check
-- [ ] Fields fixed: annual fee, index, fund size, replication method (plus as-of date for each)
-- [ ] Extraction prompt written and saved
-- [ ] Extraction run on all documents, raw output saved unchanged
+- [x] Fields fixed: annual fee, index, fund size, replication method (plus as-of date for each)
+- [x] Extraction prompt written and saved (method/extraction_prompt.md)
+- [ ] Extraction run on all documents, raw output saved unchanged (13 of 27 done)
 - [ ] 10 funds read by hand, correct values recorded before looking at the tool output
 - [ ] Accuracy table: fields correct out of fields checked, per field
 - [ ] Decision on how to handle errors (fix by hand, re-run, or exclude) logged
@@ -163,7 +174,8 @@ Only what has actually been done, with real numbers.
 - DECISIONS.md: every choice and why
 - MISTAKES.md: every error and the fix
 - charts/: public charts
-- data/ (local only): raw issuer lists, survey, final fund list, return tables, terms notes, build scripts, doc_tracker.csv, docs/ (source PDFs)
+- method/: extraction prompt
+- data/ (local only): raw issuer lists, survey, final fund list, return tables, terms notes, build scripts, doc_tracker.csv, docs/ (source PDFs), extraction/ (raw tool output, extracted table, hand-check sheet)
 
 ## History
 
@@ -174,3 +186,4 @@ Only what has actually been done, with real numbers.
 - 2026-11-05: issuer terms checked for five issuers; decided raw data stays local (D-005)
 - 2026-11-05: terms accepted on five issuer sites; survey finished (79 funds); chart made; scope, inclusion rule and share class rule set (D-008 to D-012); Phase 1 done pending spot-check
 - 2026-11-06: 5 survey rows spot-checked, all fees match; Phase 2 started, 13 documents saved, tracker made (D-013, D-014)
+- 2026-11-06: extraction prompt written; extraction run on the 13 saved documents (D-015, D-016)

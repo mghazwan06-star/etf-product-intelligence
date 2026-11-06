@@ -1,6 +1,6 @@
 # Global Equity ETFs: Fees, Tracking and Product Gaps
 
-Work in progress. Started October 2026. Phase 1 (choosing the funds) is done; nothing has been concluded yet.
+Work in progress. Started October 2026. Phase 1 (choosing the funds) is done and the documents are being collected and read. Nothing has been concluded yet.
 
 ![Global equity UCITS ETFs by index family](charts/funds_per_index.svg)
 
@@ -17,7 +17,7 @@ Among UCITS ETFs that track a global equity index, which ones give investors goo
 5. Build a simple break-even model for a possible new product, with three scenarios and the assumptions labelled.
 6. Write a two-page brief and a short deck.
 
-The phases are laid out in [PHASES.md](PHASES.md). Current status is in [PROGRESS.md](PROGRESS.md), my choices are in [DECISIONS.md](DECISIONS.md) and my errors are in [MISTAKES.md](MISTAKES.md).
+The phases are laid out in [PHASES.md](PHASES.md). The exact extraction prompt is in [method/extraction_prompt.md](method/extraction_prompt.md). Current status is in [PROGRESS.md](PROGRESS.md), my choices are in [DECISIONS.md](DECISIONS.md) and my errors are in [MISTAKES.md](MISTAKES.md).
 
 ## Ground rules
 

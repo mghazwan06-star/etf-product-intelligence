@@ -10,3 +10,4 @@ Record every error, what caused it, how it was caught, and the fix.
 | 2026-11-05 | 1 | Funds-per-index chart cut off the longest label and said "1 variants" | Looked at the rendered chart | Widened the right margin, fixed the plural |
 | 2026-11-06 | 2 | First download of the iShares MSCI World (IWRD) factsheet saved an 87-byte error message as a .pdf | Checked file types after downloading | Deleted it and downloaded again; now a real 4-page PDF |
 | 2026-11-06 | 2 | Invesco downloads left 4 empty .pdf files after the site refused them | Checked file types after downloading | Deleted the empty files; marked the 4 documents as to save from the browser |
+| 2026-11-06 | 3 | Tried to read only the first pages of each factsheet; the page-range option needs a tool that isn't installed | Error on the first try | Read each factsheet in full instead (4 pages each) |
